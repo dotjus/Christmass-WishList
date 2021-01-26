@@ -3,12 +3,19 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import cors from 'cors'
 
+// imports posts routes
+import postRoutes from './routes/posts.js'
+
 // Can not use this because this file is being loaded as ES module
 // configures the variables in dontenv file
 // require('dotenv').config()
 // const CONNECTION_URL = process.env.ATLAS_URI
 
 const app = express()
+
+// midleware that connects routes to application
+// http://localhost:5000/posts is required
+app.use('/posts', postRoutes)
 
 app.use(bodyParser.json({ limit: '30mb', extended: true }))
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
